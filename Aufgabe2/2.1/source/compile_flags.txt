@@ -1,0 +1,10 @@
+-std=c++17
+--language=c++
+-Iinclude
+-Iinclude/imgui
+-Ithird-party/fmt/include
+-Ithird-party/glfw/include
+-Ithird-party/glad/include
+-Ithird-party/stb/include
+-Ithird-party/glm
+-Wall

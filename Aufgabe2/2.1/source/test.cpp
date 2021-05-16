@@ -1,27 +1,22 @@
 #include <iostream>
+#include <string>
 #include "Fifo.h"
 
+using namespace std;
+
+void test(){
+     Fifo f;
+     f.push("123");
+     f.push("tesdt");
+     f.push("test1234");
+     while(f > 0){
+         cout << f.pop() << endl;
+     }
+}
+
+
 int main(){
-    Fifo f;
-
-    f.push("test1");
-    f.push("test2");
-    f.push("test3");
-
-
-    std::cout << f << endl;
-
-    f.pop();
-    
-    f.info();
-
-    f << "eins" << "2" << "fuenf";
-
-    f.info();
-
-    f >> "fuenf";
-    f.info();
-    std::cout << f << endl;
+    test();
     system("pause");
     return 0;
 }

@@ -50,7 +50,6 @@ int main(int nParameter, char *parameter[]) {
 
         cout << "> Fifo mittels Ein- und Ausgabeoperator fuellen" << endl;
         s << "One"; s << "Two"; s << "Three";
-
         cout << "> tiefe Kopie anlegen und zuweisen" << endl;
         Fifo kopie1(s);
         Fifo kopie2;
@@ -59,6 +58,7 @@ int main(int nParameter, char *parameter[]) {
         kopie1 << "Four";
         kopie2.push("Five");
         cout << "> Fifo-Kopien ausgeben (die erste drei Werte muessen jeweils gleich sein)" << endl;
+        
         string help;
         cout << "  s:"       << endl;
         s      >> help; cout << help << endl;
@@ -74,7 +74,6 @@ int main(int nParameter, char *parameter[]) {
         cout << "  kopie2:" << endl;
         kopie2.info();
         cout << "Fifo sollte noch alle Elemente enthalten - tatsaechliche Anzahl der Elemente: " << kopie2.size() << endl;
-
     } catch (const char* error) {
         cout << "> Failure: Fifo Objekt sollte hier keine Ausnahme werfen:" << endl;
         cout << " >>> " << error << endl;

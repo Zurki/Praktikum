@@ -34,15 +34,13 @@ class Fifo{
         ~Fifo();
        
         Fifo& operator<<(const string&);
-        Fifo& operator>>(const string& str);
+        void operator>>(string&);
         operator int () const;
         
         int size()const;
         void info();
-
         string pop();
         void push(string val);
 };
 
 //////////////////////////////////////////////////////
-

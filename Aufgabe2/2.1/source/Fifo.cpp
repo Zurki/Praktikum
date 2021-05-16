@@ -5,7 +5,10 @@ using namespace std;
 //////////////////////////////////////////////////////
 
 Fifo::~Fifo(){
-    //todo: alle Elemente zerstören
+    while(head != NULL){
+        deleteHead();
+        delete temp;
+    }
 }
 
 Fifo::Fifo(){
@@ -15,10 +18,15 @@ Fifo::Fifo(){
 }
 
 void Fifo::deleteHead(){
-    if(head->next != NULL)
+    if(head->next != NULL){
         temp = head->next;
-    delete head;
-    head = temp;
+        delete head;
+        head = temp;
+    }
+    else{
+        delete head;
+        head = NULL;
+    }
 }
 
 
@@ -41,10 +49,12 @@ void Fifo::push(string val){
 
 string Fifo::pop(){
     string out = "";
-    if(head->next != NULL)
-        out = head->next->data;
-    
-    deleteHead();
+    if(head != NULL){
+        out = head->data;
+        deleteHead();
+    }
+    else
+        throw new bad_alloc;
 
     return out;
 }
@@ -67,35 +77,27 @@ Fifo& Fifo::operator<<(const string& str){
     return *this;
 }
 
-Fifo& Fifo::operator>>(const string& str){
-    fifoPtr t = this->head;
-
-
-
-    while(t->data != str){
-        this->deleteHead();
-        if(t->next != NULL)
-            t = t->next;
-        else
-            throw invalid_argument("no such string");
-    }
-    return *this;
+void Fifo::operator>>(string& str){
+    str = head->data;
+    this->pop();
 }
 
 int Fifo::size() const{
-    fifoPtr t = head;
     int counter = 0;
-    while(t != NULL){
-        counter++;
-        if(t->next !=NULL)
-            t = t->next;
-        else
-            t = NULL;
+    if(head != NULL){
+    fifoPtr t = head;
+        while(t != NULL){
+            counter++;
+            if(t->next !=NULL)
+                t = t->next;
+            else
+                t = NULL;
+        }
     }
     return counter;
 }
 
 Fifo::operator int () const{
-    return size();
+    return this->size();
 }
 

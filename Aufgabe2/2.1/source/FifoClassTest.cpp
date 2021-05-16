@@ -77,9 +77,12 @@ int main(int nParameter, char *parameter[]) {
     } catch (const char* error) {
         cout << "> Failure: Fifo Objekt sollte hier keine Ausnahme werfen:" << endl;
         cout << " >>> " << error << endl;
+        system("pause");
         return 3;
     } catch (...) {
         cout << "> Failure: Unbekannte Ausnahme" << endl;
+
+        system("pause");
         return 3;
     }
     //
@@ -95,6 +98,7 @@ int main(int nParameter, char *parameter[]) {
             cout << " >>> " << error << endl;
         } catch (...) {
             cout << "> Failure: Unbekannte Ausnahme" << endl;
+            system("pause");
             return 3;
         }
         try {
@@ -111,11 +115,11 @@ int main(int nParameter, char *parameter[]) {
             cout << " >>> " << error << endl;
         } catch (...) {
             cout << "> Failure: Unbekannte Ausnahme" << endl;
+            system("pause");
             return 3;
         }
     }
 
     system("pause");
     return 0;
-
 }

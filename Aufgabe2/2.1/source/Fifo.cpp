@@ -17,11 +17,24 @@ Fifo::Fifo(){
     temp = NULL;
 }
 
+Fifo::Fifo(const Fifo& f){
+    head = NULL;
+    curr = NULL;
+    temp = NULL;
+
+    temp = f.head;
+    while(temp != NULL){
+        this->push(this->temp->data);
+        temp = temp->next;
+    }
+}
+
 void Fifo::deleteHead(){
     if(head->next != NULL){
         temp = head->next;
         delete head;
         head = temp;
+        temp = NULL;
     }
     else{
         delete head;
@@ -96,6 +109,20 @@ int Fifo::size() const{
     }
     return counter;
 }
+
+bool Fifo::operator>(int i){
+    return this->size() > i;
+}
+
+void Fifo::operator=(const Fifo& f){
+    if(this->size() > 0){
+        while(this->head != NULL){
+            this->deleteHead();
+        }
+    }
+    cout << "popped" << endl;
+}
+
 
 Fifo::operator int () const{
     return this->size();

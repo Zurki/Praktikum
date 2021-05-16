@@ -31,12 +31,15 @@ class Fifo{
         
     public:
         Fifo();
+        Fifo(const Fifo&);
         ~Fifo();
        
         Fifo& operator<<(const string&);
         void operator>>(string&);
         operator int () const;
-        
+        void operator=(const Fifo&);
+        bool operator>(int i);
+
         int size()const;
         void info();
         string pop();

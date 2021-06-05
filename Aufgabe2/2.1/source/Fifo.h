@@ -1,17 +1,7 @@
 #include <string>
 #include <iostream>
-#include <vector>
 
 using namespace std;
-
-//////////////////////////////////////////////////////
-
-struct stringException : public std::exception{
-    string s;
-    stringException(string ss) : s(ss){}
-    ~stringException() throw (){}
-    const char* what() const throw(){ return s.c_str(); }
-}; 
 
 //////////////////////////////////////////////////////
 
@@ -37,7 +27,7 @@ class Fifo{
         Fifo& operator<<(const string&);
         void operator>>(string&);
         operator int () const;
-        void operator=(const Fifo&);
+        Fifo operator=(const Fifo&);
         bool operator>(int i);
 
         int size()const;

@@ -4,6 +4,11 @@ using namespace std;
 
 //////////////////////////////////////////////////////
 
+/**
+ *
+ * Funktion: Dekonstruktor eines FIFOs
+ *
+ */
 Fifo::~Fifo(){
     while(head != NULL){
         deleteHead();
@@ -11,12 +16,22 @@ Fifo::~Fifo(){
     }
 }
 
+/**
+ *
+ * Funktion: Konstruktor eines leeren FIFOs
+ *
+ */
 Fifo::Fifo(){
     head = NULL;
     curr = NULL;
     temp = NULL;
 }
 
+/**
+ *
+ * Funktion: Konstruktor eines FIFOs anhand eienes bestehendens FIFOs
+ *
+ */
 Fifo::Fifo(const Fifo& f){
     head = NULL;
     curr = NULL;
@@ -29,6 +44,11 @@ Fifo::Fifo(const Fifo& f){
     }
 }
 
+/**
+ *
+ * Funktion: löscht den head eines FIFOs
+ *
+ */
 void Fifo::deleteHead(){
     if(head->next != NULL){
         temp = head->next;
@@ -42,7 +62,11 @@ void Fifo::deleteHead(){
     }
 }
 
-
+/**
+ *
+ * Funktion: Fügt ein Element an ein FIFO an
+ *
+ */
 void Fifo::push(string val){
     fifoPtr n = new FifoElement;
     
@@ -60,6 +84,11 @@ void Fifo::push(string val){
         head = n;
 }
 
+/**
+ *
+ * Funktion: popped ein FIFO, gibt einen String mit dem obersten Element aus
+ *
+ */
 string Fifo::pop(){
     string out = "";
     if(head != NULL){
@@ -67,11 +96,16 @@ string Fifo::pop(){
         deleteHead();
     }
     else
-        throw new bad_alloc;
+        throw "unterlauf";
 
     return out;
 }
 
+/**
+ *
+ * Funktion: Gibt den ganzen Inhalt eines FIFOs aus
+ *
+ */
 void Fifo::info(){
     string out;
     fifoPtr t = head;
@@ -85,16 +119,30 @@ void Fifo::info(){
     cout << out << endl;
 }
 
+/**
+ *
+ * Funktion: stream Operator der ein Element pushed
+ *
+ */
 Fifo& Fifo::operator<<(const string& str){
     this->push(str);
     return *this;
 }
 
+/**
+ *
+ * Funktion: stream Operator der das oberste Element popped und in einem String speichert
+ *
+ */
 void Fifo::operator>>(string& str){
-    str = head->data;
-    this->pop();
+    str = this->pop();
 }
 
+/**
+ *
+ * Funktion: gibt die groeße eines FIFos zurück
+ *
+ */
 int Fifo::size() const{
     int counter = 0;
     if(head != NULL){
@@ -110,21 +158,39 @@ int Fifo::size() const{
     return counter;
 }
 
+/**
+ *
+ * Funktion: überprüft ob die Anzahl an Elementen in dem FIFO groeßer ist als eine Zahl i
+ *
+ */
 bool Fifo::operator>(int i){
     return this->size() > i;
 }
 
-void Fifo::operator=(const Fifo& f){
-    if(this->size() > 0){
-        while(this->head != NULL){
-            this->deleteHead();
-        }
+/**
+ *
+ * Funktion: setzt ein FIFO mit einem anderen gleich
+ *
+ */
+Fifo Fifo::operator=(const Fifo& fl){
+    Fifo f(fl);
+    while(this->size() > 0){
+        this->deleteHead();
     }
-    cout << "popped" << endl;
+
+    fifoPtr tempF = f.head;
+    while(tempF != NULL){
+        push(tempF->data);
+        tempF = tempF->next;
+    }
+    return *this;    
 }
 
-
+/**
+ *
+ * Funktion: laesst den FIFO direkt aufrufen um direkt die groeße zu bekommen
+ *
+ */
 Fifo::operator int () const{
     return this->size();
 }
-

@@ -14,9 +14,10 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-using namespace std;
 #include "Fifo.h"
 
+
+using namespace std;
 
 
 /*
@@ -54,7 +55,9 @@ int main(int nParameter, char *parameter[]) {
         Fifo kopie1(s);
         Fifo kopie2;
         kopie2=s;
+        kopie2.info();
         kopie2=kopie2;
+        kopie2.info();
         kopie1 << "Four";
         kopie2.push("Five");
         cout << "> Fifo-Kopien ausgeben (die erste drei Werte muessen jeweils gleich sein)" << endl;
@@ -98,7 +101,6 @@ int main(int nParameter, char *parameter[]) {
             cout << " >>> " << error << endl;
         } catch (...) {
             cout << "> Failure: Unbekannte Ausnahme" << endl;
-            system("pause");
             return 3;
         }
         try {
@@ -115,11 +117,9 @@ int main(int nParameter, char *parameter[]) {
             cout << " >>> " << error << endl;
         } catch (...) {
             cout << "> Failure: Unbekannte Ausnahme" << endl;
-            system("pause");
             return 3;
         }
-    }
-
+        }
     system("pause");
     return 0;
 }
